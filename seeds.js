@@ -1,9 +1,5 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-const mongoose = require('mongoose');
-
 const Product = require('./models/product')
+const mongoose = require('mongoose');
 
 main().catch(err => console.log(err));
 
@@ -12,12 +8,9 @@ async function main() {
   console.log("connected to mongo");
 }
 
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.listen(3000, () => {})
-
-app.get('/dog', (req, res) => {
-    res.send('AWW! AWW!')
+const p = new Product({
+    name: 'Ruby Grapefruit',
+    price: 1.99,
+    category: 'fruit'
 })
+p.save().then(p => { console.log(p)}).catch(e => { console.log(e)});
