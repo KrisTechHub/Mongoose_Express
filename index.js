@@ -19,13 +19,16 @@ app.use(express.urlencoded({ extended : true })) // middleware for parsing
 app.use(methodOverride('_method')) //middleware to override with POST having ?_method=PATCH
 
 
+const categories = ['fruit', 'vegetable', 'dairy'];
+
+
 app.get('/products', async (req, res) => { //query the product model
     const products = await Product.find({}) //to get/find all products, await for mongoose operation
     res.render('products/index',  { products }); //2nd argument is to let index.ejs access 'products'
 })
 
 app.get('/products/new', (req, res) => { //for creating new product
-    res.render('products/new')
+    res.render('products/new', { categories })
 })
 
 app.post('/products', async(req, res) => { //route for the post request in new.ejs
@@ -43,7 +46,7 @@ app.get('/products/:id', async (req, res) => { //to view each product
 app.get('/products/:id/edit', async (req, res) => {
     const { id } = req.params; //define Id
     const product = await Product.findById(id) //find the id
-    res.render('products/edit', { product })
+    res.render('products/edit', { product, categories })
 })
 
 app.put('/products/:id', async (req, res) => { //route for the put request on edit.ejs
