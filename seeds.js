@@ -9,9 +9,7 @@ async function main() {
 }
 
 // const p = new Product({
-//     name: 'Ruby Grapefruit',
-//     price: 1.99,
-//     category: 'fruit'
+
 // })
 // p.save().then(p => { console.log(p)}).catch(e => { console.log(e)});
 
@@ -41,12 +39,17 @@ const seedProducts = [
         price: 2.69,
         category: 'dairy'
     },
+    {
+        name: 'Ruby Grapefruit',
+        price: 1.99,
+        category: 'fruit'
+    }
 ]
 
-Product.insertMany(seedProducts)
-    .then(res => {
-        console.log(res)
-    })
-    .catch(e => {
-        console.log(e)
-    })
+// Product.insertMany(seedProducts)
+//     .then(res => {
+//         console.log(res)
+//     })
+//     .catch(e => {
+//         console.log(e)
+//     })

@@ -17,8 +17,18 @@ app.set('view engine', 'ejs');
 
 
 app.get('/products', async (req, res) => { //query the product model
-    const products = await Product.find({}) //to get/find all products
-    res.send(products);
+    const products = await Product.find({}) //to get/find all products, await for mongoose operation
+    res.render('products/index',  { products }); //2nd argument is to let index.ejs access 'products'
+})
+
+app.get('/products/new', (req, res) => {
+    res.render('products/new')
+})
+
+app.get('/products/:id', async (req, res) => {
+    const { id } = req.params; //define Id
+    const product = await Product.findById(id) //find the id
+    res.render('products/show', { product });
 })
 
 app.listen(3000, () => {console.log("on port 3000");})

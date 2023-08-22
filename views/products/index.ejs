@@ -7,5 +7,11 @@
 </head>
 <body>
     <h1>App Products</h1>
+
+    <ul>
+        <% for (product of products) {%>
+            <li><a href="/products/<%= product.id %>"><%= product.name %></a></li>
+        <% } %>
+    </ul>
 </body>
 </html>
