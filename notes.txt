@@ -12,3 +12,5 @@ MONGOOSE WITH EXPRESS CRUD APP
 10. create a model
 11. export the project.js by adding 'module.exports = Product';
 12. Define product model in index.js
+13. add more products to database using insertMany();
+14. 

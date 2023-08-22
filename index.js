@@ -1,9 +1,8 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const mongoose = require('mongoose');
-
 const Product = require('./models/product')
+const mongoose = require('mongoose');
 
 main().catch(err => console.log(err));
 
@@ -18,6 +17,6 @@ app.set('view engine', 'ejs');
 
 app.listen(3000, () => {})
 
-app.get('/dog', (req, res) => {
+app.get('/products', (req, res) => {
     res.send('AWW! AWW!')
 })
