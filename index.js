@@ -15,8 +15,10 @@ async function main() {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.listen(3000, () => {})
 
-app.get('/products', (req, res) => {
-    res.send('AWW! AWW!')
+app.get('/products', async (req, res) => { //query the product model
+    const products = await Product.find({}) //to get/find all products
+    res.send(products);
 })
+
+app.listen(3000, () => {console.log("on port 3000");})
