@@ -14,6 +14,7 @@ async function main() {
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended : true })) //use middleware for parsing
 
 
 app.get('/products', async (req, res) => { //query the product model
@@ -23,6 +24,11 @@ app.get('/products', async (req, res) => { //query the product model
 
 app.get('/products/new', (req, res) => {
     res.render('products/new')
+})
+
+app.post('/products', (req, res) => { //route for the post request in new.ejs
+    console.log(req.body);
+    res.send("creating your product")
 })
 
 app.get('/products/:id', async (req, res) => {
