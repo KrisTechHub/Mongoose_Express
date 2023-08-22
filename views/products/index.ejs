@@ -6,7 +6,10 @@
     <title>All Products</title>
 </head>
 <body>
-    <h1>App Products</h1>
+    <h1><%= category %> Products</h1>
+
+    <h4>View by Category</h4>
+    <a href=""></a>
 
     <ul>
         <% for (product of products) {%>
@@ -15,5 +18,8 @@
     </ul>
 
     <a href="products/new">Add New Product</a>
+    <% if (category !== 'All') { %>
+        <a href="/products">All Products</a>
+    <% } %>
 </body>
 </html>

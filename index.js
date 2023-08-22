@@ -23,8 +23,14 @@ const categories = ['fruit', 'vegetable', 'dairy'];
 
 
 app.get('/products', async (req, res) => { //query the product model
-    const products = await Product.find({}) //to get/find all products, await for mongoose operation
-    res.render('products/index',  { products }); //2nd argument is to let index.ejs access 'products'
+    const { category } = req.query;
+    if (category) {
+        const products = await Product.find({ category }) //to get/find all products, await for mongoose operation
+        res.render('products/index',  { products, category }); //2nd argument is to let index.ejs access 'products'
+    } else {
+        const products = await Product.find({ }) //to get/find all products, await for mongoose operation
+        res.render('products/index',  { products, category: 'All' }); //2nd argument is to let index.ejs access 'products'
+    };
 })
 
 app.get('/products/new', (req, res) => { //for creating new product
@@ -54,6 +60,12 @@ app.put('/products/:id', async (req, res) => { //route for the put request on ed
     const updatedProduct = await Product.findByIdAndUpdate(id, req.body, {runValidators : true, new: true}) //find the id, use new:true to not include old info
     await updatedProduct.save();
     res.redirect(`/products/${updatedProduct._id}`)
+})
+
+app.delete('/products/:id', async (req, res) => {
+    const { id } = req.params; //define Id
+    const deletedProduct = await Product.findByIdAndDelete(id);
+    res.redirect('/products');
 })
 
 app.listen(3000, () => {console.log("on port 3000");})
